@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MerceriaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Envios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Paqueteria" Type="int" Nullable="false" />
+          <Property Name="Id_Venta" Type="int" Nullable="false" />
+          <Property Name="Codigo_Rastreo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fecha_Envio" Type="date" Nullable="false" />
+          <Property Name="Fecha_Estimada_Entrega" Type="date" Nullable="false" />
+          <Property Name="Estado_Envio" Type="int" Nullable="false" />
+          <Property Name="Fecha_Entrega" Type="date" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tarjetas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Usuario" Type="int" Nullable="false" />
+          <Property Name="Numero_Tarjeta" Type="nchar" MaxLength="16" Nullable="false" />
+          <Property Name="Mes_Vencimiento" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="Anio_Vencimiento" Type="nchar" MaxLength="4" Nullable="false" />
+          <Property Name="Estado" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nchar" MaxLength="30" />
+          <Property Name="Apellido_Paterno" Type="nchar" MaxLength="30" />
+          <Property Name="Apellido_Materno" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Fecha_Nacimiento" Type="date" Nullable="false" />
+          <Property Name="Telefono" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Correo" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id_TipoUsuario" Type="int" Nullable="false" />
+          <Property Name="Username" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="text" Nullable="false" />
+          <Property Name="Estado" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_Usuario_Tarjeta">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Tarjetas" Type="Self.Tarjetas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarjetas">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MerceriaModelStoreContainer">
+          <EntitySet Name="Envios" EntityType="Self.Envios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tarjetas" EntityType="Self.Tarjetas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_Usuario_Tarjeta" Association="Self.fk_Usuario_Tarjeta">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Tarjetas" EntitySet="Tarjetas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MerceriaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Envios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Paqueteria" Type="Int32" Nullable="false" />
+          <Property Name="Id_Venta" Type="Int32" Nullable="false" />
+          <Property Name="Codigo_Rastreo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fecha_Envio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fecha_Estimada_Entrega" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Estado_Envio" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_Entrega" Type="DateTime" Precision="0" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tarjetas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Numero_Tarjeta" Type="String" MaxLength="16" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Mes_Vencimiento" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Anio_Vencimiento" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Estado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.fk_Usuario_Tarjeta" FromRole="Tarjetas" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Apellido_Paterno" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Apellido_Materno" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Fecha_Nacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Id_TipoUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tarjetas" Relationship="Self.fk_Usuario_Tarjeta" FromRole="Usuarios" ToRole="Tarjetas" />
+        </EntityType>
+        <Association Name="fk_Usuario_Tarjeta">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Tarjetas" Type="Self.Tarjetas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tarjetas">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="contextMerceria" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Envios" EntityType="Self.Envios" />
+          <EntitySet Name="Tarjetas" EntityType="Self.Tarjetas" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="fk_Usuario_Tarjeta" Association="Self.fk_Usuario_Tarjeta">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Tarjetas" EntitySet="Tarjetas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MerceriaModelStoreContainer" CdmEntityContainer="contextMerceria">
+          <EntitySetMapping Name="Envios">
+            <EntityTypeMapping TypeName="MerceriaModel.Envios">
+              <MappingFragment StoreEntitySet="Envios">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Paqueteria" ColumnName="Id_Paqueteria" />
+                <ScalarProperty Name="Id_Venta" ColumnName="Id_Venta" />
+                <ScalarProperty Name="Codigo_Rastreo" ColumnName="Codigo_Rastreo" />
+                <ScalarProperty Name="Fecha_Envio" ColumnName="Fecha_Envio" />
+                <ScalarProperty Name="Fecha_Estimada_Entrega" ColumnName="Fecha_Estimada_Entrega" />
+                <ScalarProperty Name="Estado_Envio" ColumnName="Estado_Envio" />
+                <ScalarProperty Name="Fecha_Entrega" ColumnName="Fecha_Entrega" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tarjetas">
+            <EntityTypeMapping TypeName="MerceriaModel.Tarjetas">
+              <MappingFragment StoreEntitySet="Tarjetas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Numero_Tarjeta" ColumnName="Numero_Tarjeta" />
+                <ScalarProperty Name="Mes_Vencimiento" ColumnName="Mes_Vencimiento" />
+                <ScalarProperty Name="Anio_Vencimiento" ColumnName="Anio_Vencimiento" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="MerceriaModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido_Paterno" ColumnName="Apellido_Paterno" />
+                <ScalarProperty Name="Apellido_Materno" ColumnName="Apellido_Materno" />
+                <ScalarProperty Name="Fecha_Nacimiento" ColumnName="Fecha_Nacimiento" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Id_TipoUsuario" ColumnName="Id_TipoUsuario" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

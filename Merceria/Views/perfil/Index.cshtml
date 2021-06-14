@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Merceria.Models.Usuarios>
+
+@{
+    ViewBag.Title = "Mi Cuenta";
+    Layout = "~/Views/Shared/_LayoutPerfil.cshtml";
+}
+
+<h2>Mi Cuenta</h2>
+
+<table class="table table-bordered table-striped">
+    <img src="~/Content/img/winnie.jpg" width="100px"/>
+</table>
+<table class="table table-bordered table-striped">
+    <input type="button" value="Actualizar Perfil" />
+</table>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido_Paterno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido_Materno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha_Nacimiento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Correo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_TipoUsuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido_Paterno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido_Materno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha_Nacimiento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Correo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id_TipoUsuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success", @style = "color: white; font-size:4rem;font-family:'Playfair Display';" })
+                </td>
+            </tr>
+        }
+
+    </table>

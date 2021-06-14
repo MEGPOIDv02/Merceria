@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Merceria.Models.Tarjetas>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutTarjetas.cshtml";
+}
+
+<h2>Tarjetas Guardadas</h2>
+
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Numero_Tarjeta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mes_Vencimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Anio_Vencimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuarios.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Numero_Tarjeta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mes_Vencimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Anio_Vencimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuarios.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Borrar", "Delete", new { id=item.Id }, new { @class = "btn btn-danger", @style = "color: white; font-size:4rem;font-family:'Playfair Display';" })
+        </td>
+    </tr>
+}
+
+</table>
